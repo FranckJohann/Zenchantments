@@ -489,7 +489,7 @@ public class EnchantArrow implements AdvancedArrow {
         public void onLaunch(LivingEntity player, List<String> lore) {
             final Config config = Config.get(player.getWorld());
             Location playLoc = player.getLocation();
-            final Location target = Utilities.getCenter(player.getTargetBlock((HashSet<Byte>) null, 220));
+            final Location target = Utilities.getCenter(player.getTargetBlock((HashSet<Material>) null, 220));
             target.setY(target.getY() + .5);
             final Location c = playLoc;
             c.setY(c.getY() + 1.1);

@@ -222,7 +222,7 @@ public class CustomEnchantment {
                     if (Storage.idleBlocks.get(blk).equals(player)) {
                         Storage.attackBlocks.put(blk, power);
                         toRemove.add(blk);
-                        blk.setVelocity(player.getTargetBlock((HashSet<Byte>) null, 7)
+                        blk.setVelocity(player.getTargetBlock((HashSet<Material>) null, 7)
                                 .getLocation().subtract(player.getLocation()).toVector().multiply(.25));
                     }
                 }
