@@ -1,7 +1,6 @@
 package zedly.zenchantments;
 
 import java.util.*;
-import java.util.regex.Pattern;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;

@@ -3,7 +3,6 @@ package zedly.zenchantments;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.commons.lang3.ArrayUtils;
-import org.bukkit.Bukkit;
 import static org.bukkit.Material.*;
 import org.bukkit.entity.*;
 import static org.bukkit.entity.EntityType.*;

@@ -24,7 +24,6 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffectType;
 import static org.bukkit.potion.PotionEffectType.*;
 import org.bukkit.util.Vector;
@@ -402,6 +401,7 @@ public class CustomEnchantment {
                     && player.getLocation().getY() >= player.getWorld().getHighestBlockYAt(player.getLocation())) {
                 ADAPTER.damagePlayer(player, rainDamage, DamageCause.CUSTOM);
             }
+            player.setFireTicks(0);
             return true;
         }
     }
@@ -2677,9 +2677,7 @@ public class CustomEnchantment {
                     return;
                 }
                 if (config.getShredDrops() == 0) {
-                    if (!ADAPTER.breakBlockNMS(relativeBlock, player)) {
-                        return;
-                    }
+                    ADAPTER.breakBlockNMS(relativeBlock, player);
                 } else {
                     BlockShredEvent relativeEvent = new BlockShredEvent(relativeBlock, player);
                     Bukkit.getServer().getPluginManager().callEvent(relativeEvent);
@@ -2768,18 +2766,14 @@ public class CustomEnchantment {
             if (evt.getEntity() instanceof LivingEntity && ADAPTER.attackEntity((LivingEntity) evt.getEntity(), (Player) evt.getDamager(), 0)) {
                 Player p = (Player) evt.getDamager();
                 LivingEntity ent = (LivingEntity) evt.getEntity();
-                int difference = (int) Math.round(level * power);
-                if (Storage.rnd.nextInt(4) == 2) {
-                    while (difference > 0) {
-                        if (p.getHealth() <= 19) {
-                            p.setHealth(p.getHealth() + 1);
-                        }
-                        if (ent.getHealth() > 2) {
-                            ent.setHealth(ent.getHealth() - 1);
-                        }
-                        difference--;
+                int difference = (int) Math.round(.17 * level * power * evt.getDamage());
+                while (difference > 0) {
+                    if (p.getHealth() <= 19) {
+                        p.setHealth(p.getHealth() + 1);
                     }
+                    difference--;
                 }
+
             }
             return true;
         }
@@ -2975,15 +2969,17 @@ public class CustomEnchantment {
                         evt.getClickedBlock().setType(YELLOW_FLOWER);
                     }
                     break;
+                case GRASS_PATH:
+                    evt.getClickedBlock().setType(GRASS);
+                    break;
                 case GRASS:
-                    evt.getClickedBlock().setType(DIRT);
+                    evt.getClickedBlock().setType(GRASS_PATH);
                     break;
                 case DIRT:
                     if (data < 2) {
                         data++;
                     } else {
                         data = 0;
-                        evt.getClickedBlock().setType(GRASS);
                     }
                     break;
                 case FENCE:
