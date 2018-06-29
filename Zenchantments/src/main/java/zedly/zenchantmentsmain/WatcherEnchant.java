@@ -1,4 +1,4 @@
-package zedly.zenchantments;
+package zedly.zenchantmentsmain;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -14,7 +14,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.EquipmentSlot;
 import static org.bukkit.inventory.EquipmentSlot.HAND;
 import org.bukkit.inventory.ItemStack;
-import static zedly.zenchantments.Tool.BOW_;
+import static zedly.zenchantmentsmain.Tool.BOW_;
 
 // This is the watcher used by the CustomEnchantment class. Each method checks the enchantments on relevant items,
 //      ensures that the item is not an enchantment book, and calls each enchantment's method if the player can

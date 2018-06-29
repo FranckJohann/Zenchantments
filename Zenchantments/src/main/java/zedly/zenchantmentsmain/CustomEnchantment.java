@@ -1,4 +1,4 @@
-package zedly.zenchantments;
+package zedly.zenchantmentsmain;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -24,11 +24,12 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import static org.bukkit.potion.PotionEffectType.*;
 import org.bukkit.util.Vector;
 
-import static zedly.zenchantments.Tool.*;
+import static zedly.zenchantmentsmain.Tool.*;
 import zedly.zenchantments.compatibility.CompatibilityAdapter;
 
 // CustomEnchantment is the defualt structure for any enchantment. Each enchantment below it will extend this class
@@ -404,6 +405,7 @@ public class CustomEnchantment {
             player.setFireTicks(0);
             return true;
         }
+
     }
 
     public static class Blizzard extends CustomEnchantment {
@@ -768,18 +770,19 @@ public class CustomEnchantment {
                 }
                 for (double i = height - 1; i >= evt.getBlock().getLocation().getY(); i--) {
                     location.setY(i);
-                    Utilities.display(Utilities.getCenter(evt.getBlock()), Particle.FLAME, 10, .1f, .5f, .5f, .5f);
+                    Utilities.display(Utilities.getCenter(location.getBlock()), Particle.FLAME, 10, .1f, .5f, .5f, .5f);
 
                     evt.getBlock().getWorld().dropItemNaturally(Utilities.getCenter(location), new ItemStack(INK_SACK, 1, (short) 2));
 
-                    Block affectedBlock = evt.getBlock();
+                    Block affectedBlock = location.getBlock();
                     Storage.fireDropLocs.add(affectedBlock);
                     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Storage.zenchantments, () -> {
                         Storage.fireDropLocs.remove(affectedBlock);
                     }, 5);
 
-                    return true;
+                    
                 }
+                return true;
             }
             if (mat != AIR) {
 

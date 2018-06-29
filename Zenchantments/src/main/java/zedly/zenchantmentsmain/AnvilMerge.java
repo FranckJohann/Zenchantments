@@ -1,4 +1,4 @@
-package zedly.zenchantments;
+package zedly.zenchantmentsmain;
 
 import java.util.*;
 import java.util.Map.Entry;

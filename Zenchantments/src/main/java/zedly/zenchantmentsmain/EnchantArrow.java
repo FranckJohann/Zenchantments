@@ -1,4 +1,4 @@
-package zedly.zenchantments;
+package zedly.zenchantmentsmain;
 
 import java.util.*;
 import org.bukkit.*;
@@ -306,7 +306,7 @@ public class EnchantArrow implements AdvancedArrow {
         public boolean onImpact(EntityDamageByEntityEvent evt) {
             if (ADAPTER.attackEntity((LivingEntity) evt.getEntity(), (Player) getArrow().getShooter(), 0)) {
                 int pow = (int) Math.round(getLevel() * getPower());
-                int dur = (int) Math.round(10 + getLevel() * 20 * getPower());
+                int dur = (int) Math.round(20 + getLevel() * 10 * getPower());
                 Utilities.addPotion((LivingEntity) evt.getEntity(), PotionEffectType.WITHER, dur, pow);
                 Utilities.addPotion((LivingEntity) evt.getEntity(), BLINDNESS, dur, pow);
             }
