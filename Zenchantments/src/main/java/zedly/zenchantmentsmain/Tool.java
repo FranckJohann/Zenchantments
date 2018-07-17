@@ -1,4 +1,4 @@
-package zedly.zenchantments;
+package zedly.zenchantmentsmain;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Material;

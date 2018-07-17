@@ -1,5 +1,5 @@
-package zedly.zenchantments;
-//For Bukkit & Spigot 1.10.X-1.11.X
+package zedly.zenchantmentsmain;
+//For Bukkit & Spigot 1.12.X
 
 import java.io.*;
 import java.util.Map;
