@@ -2634,7 +2634,7 @@ public class CustomEnchantment {
 
         private static final Material[] ALLOWED_MATERIALS = new Material[]{STONE, COAL_ORE, REDSTONE_ORE, DIAMOND_ORE, GOLD_ORE, IRON_ORE,
             NETHERRACK, LAPIS_ORE, GLOWSTONE, QUARTZ_ORE, EMERALD_ORE, GRASS, SOUL_SAND, GLOWING_REDSTONE_ORE,
-            DIRT, MYCEL, SAND, GRAVEL, SOUL_SAND, CLAY, HARD_CLAY, STAINED_CLAY, SANDSTONE, RED_SANDSTONE};
+            DIRT, MYCEL, SAND, GRAVEL, SOUL_SAND, CLAY, HARD_CLAY, STAINED_CLAY, SANDSTONE, RED_SANDSTONE, ICE, PACKED_ICE};
 
         private static final Material SHOVELABLE_MATERIALS[] = new Material[]{GLOWSTONE, GRASS, DIRT, MYCEL, SOUL_SAND, SAND, GRAVEL, SOUL_SAND, CLAY};
 
@@ -3460,22 +3460,13 @@ public class CustomEnchantment {
                 if (evt.getAction().equals(RIGHT_CLICK_BLOCK)) {
                     Block start = evt.getClickedBlock().getRelative(evt.getBlockFace());
                     List<Block> blocks = bfs(start);
-
-                    Material[] mats = {STONE, GRASS, DIRT, COBBLESTONE, WOOD, SAND, GRAVEL,
-                        GOLD_ORE, IRON_ORE, COAL_ORE, LOG, LEAVES, LAPIS_ORE, SANDSTONE,
-                        DOUBLE_STEP, BRICK, TNT, BOOKSHELF, MOSSY_COBBLESTONE, ICE, SNOW_BLOCK,
-                        CLAY, NETHERRACK, SOUL_SAND, SMOOTH_BRICK, HUGE_MUSHROOM_1, HUGE_MUSHROOM_2,
-                        MYCEL, NETHER_BRICK, ENDER_STONE, WOOD_DOUBLE_STEP, EMERALD_ORE, QUARTZ_ORE,
-                        QUARTZ_BLOCK, STAINED_CLAY, LEAVES_2, LOG_2, SLIME_BLOCK, PRISMARINE, HARD_CLAY,
-                        PACKED_ICE, RED_SANDSTONE, DOUBLE_STONE_SLAB2};
-
                     Material mat = AIR;
                     byte bt = 0;
                     int c = -1;
 
                     for (int i = 0; i < 9; i++) {
                         if (evt.getPlayer().getInventory().getItem(i) != null) {
-                            if (evt.getPlayer().getInventory().getItem(i).getType().isBlock() && ArrayUtils.contains(mats, evt.getPlayer().getInventory().getItem(i).getType())) {
+                            if (evt.getPlayer().getInventory().getItem(i).getType().isBlock() && ArrayUtils.contains(Storage.COMPATIBILITY_ADAPTER.getTerraformerMaterials(), evt.getPlayer().getInventory().getItem(i).getType())) {
                                 mat = evt.getPlayer().getInventory().getItem(i).getType();
                                 c = i;
                                 bt = evt.getPlayer().getInventory().getItem(i).getData().getData();
