@@ -1,21 +1,21 @@
-package zedly.zenchantments;
+package zedly.zenchantments.enums;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Material;
-import static org.bukkit.Material.*;
 import org.bukkit.inventory.ItemStack;
+
+import static org.bukkit.Material.*;
 
 // Enum for Tool sets within the game, used by enchantment classes to easily define what tools can be used on each
 //      enchantment. Each enum has a String representation used in the config, and an array of materials it represents
 public enum Tool {
-
     AXE("Axe", new Material[]{WOOD_AXE, STONE_AXE, GOLD_AXE, IRON_AXE, DIAMOND_AXE}, false),
     SHOVEL("Shovel", new Material[]{WOOD_SPADE, STONE_SPADE, GOLD_SPADE, IRON_SPADE, DIAMOND_SPADE}, false),
     SWORD("Sword", new Material[]{WOOD_SWORD, STONE_SWORD, GOLD_SWORD, IRON_SWORD, DIAMOND_SWORD}, false),
     PICKAXE("Pickaxe", new Material[]{WOOD_PICKAXE, STONE_PICKAXE, GOLD_PICKAXE, IRON_PICKAXE, DIAMOND_PICKAXE}, false),
     ROD("Rod", new Material[]{FISHING_ROD}, true),
     SHEAR("Shears", new Material[]{SHEARS}, true),
-    BOW_("Bow", new Material[]{BOW}, true),
+    BOW("Bow", new Material[]{Material.BOW}, true),
     LIGHTER("Lighter", new Material[]{FLINT_AND_STEEL}, true),
     HOE("Hoe", new Material[]{WOOD_HOE, STONE_HOE, GOLD_HOE, IRON_HOE, DIAMOND_HOE}, true),
     HELMET("Helmet", new Material[]{DIAMOND_HELMET, IRON_HELMET, GOLD_HELMET, CHAINMAIL_HELMET, LEATHER_HELMET}, false),

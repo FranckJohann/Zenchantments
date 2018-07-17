@@ -1,8 +1,12 @@
 package zedly.zenchantments;
 
-import java.util.*;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 // This is used to manage players on the server. It allows for easy access in enabling/disabling enchantments
 //      and for adding cooldowns for different enchantments as they are used
@@ -60,14 +64,14 @@ public class EnchantPlayer {
     // Disables all enchantments for the player
     public void disableAll() {
         for (CustomEnchantment enchant : Config.get(player.getWorld()).getEnchants().values()) {
-            player.setMetadata("ze." + enchant.getEnchantmentId(), new FixedMetadataValue(Storage.zenchantments, true));
+            player.setMetadata("ze." + enchant.getId(), new FixedMetadataValue(Storage.zenchantments, true));
         }
     }
 
     // Enables all enchantments for the player
     public void enableAll() {
         for (CustomEnchantment enchant : Config.get(player.getWorld()).getEnchants().values()) {
-            player.setMetadata("ze." + enchant.getEnchantmentId(), new FixedMetadataValue(Storage.zenchantments, false));
+            player.setMetadata("ze." + enchant.getId(), new FixedMetadataValue(Storage.zenchantments, false));
         }
     }
 

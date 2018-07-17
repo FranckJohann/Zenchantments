@@ -1,13 +1,20 @@
 package zedly.zenchantments;
 
-import java.util.*;
-import org.apache.commons.lang.*;
-import org.bukkit.*;
-import static org.bukkit.Material.*;
-import org.bukkit.command.*;
+import org.apache.commons.lang.WordUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.*;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.*;
+
+import static org.bukkit.Material.*;
 
 // This class handles all commands used by this plugin
 public class CommandProcessor {
@@ -193,7 +200,7 @@ public class CommandProcessor {
             if (config.getEnchants().containsKey(enchant.replace(" ", "").toLowerCase())) {
                 CustomEnchantment ench = config.getEnchants().get(enchant.replace(" ", "").toLowerCase());
                 String e = "";
-                if (player.isDisabled(ench.getEnchantmentId())) {
+                if (player.isDisabled(ench.getId())) {
                     e = ChatColor.RED + "**Disabled** ";
                 }
                 player.sendMessage(Storage.logo + (ench.loreName + ": " + e + ChatColor.AQUA
@@ -203,7 +210,7 @@ public class CommandProcessor {
             player.sendMessage(Storage.logo + "Enchantment Info:");
             for (CustomEnchantment ench : config.getEnchants(player.getPlayer().getItemInHand(), true).keySet()) {
                 String s = "";
-                if (player.isDisabled(ench.getEnchantmentId())) {
+                if (player.isDisabled(ench.getId())) {
                     s = ChatColor.RED + "**Disabled** ";
                 }
                 player.sendMessage((ChatColor.DARK_AQUA + ench.loreName + ": " + s + ChatColor.AQUA
@@ -223,7 +230,7 @@ public class CommandProcessor {
             String toDisable = args[1].toLowerCase();
             if (config.getEnchants().containsKey(toDisable)) {
                 CustomEnchantment ench = config.getEnchants().get(toDisable);
-                player.disable(ench.getEnchantmentId());
+                player.disable(ench.getId());
                 player.sendMessage(Storage.logo + "The enchantment " + ChatColor.DARK_AQUA
                         + ench.loreName + ChatColor.AQUA + " has been " + ChatColor.RED + "disabled.");
             } else if (toDisable.equals("all")) {
@@ -247,7 +254,7 @@ public class CommandProcessor {
             String toDisable = args[1].toLowerCase();
             if (config.getEnchants().containsKey(toDisable)) {
                 CustomEnchantment ench = config.getEnchants().get(toDisable);
-                player.enable(ench.getEnchantmentId());
+                player.enable(ench.getId());
                 player.sendMessage(Storage.logo + "The enchantment " + ChatColor.DARK_AQUA
                         + ench.loreName + ChatColor.AQUA + " has been" + ChatColor.GREEN + " enabled.");
             } else if (toDisable.equals("all")) {

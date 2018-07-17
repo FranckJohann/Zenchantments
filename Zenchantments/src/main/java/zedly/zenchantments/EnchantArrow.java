@@ -1,20 +1,27 @@
 package zedly.zenchantments;
 
-import java.util.*;
 import org.bukkit.*;
-import static org.bukkit.Material.*;
-import org.bukkit.Sound;
 import org.bukkit.entity.*;
-import static org.bukkit.entity.EntityType.BLAZE;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.*;
-import org.bukkit.inventory.*;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import static org.bukkit.potion.PotionEffectType.*;
 import org.bukkit.util.Vector;
+import zedly.zenchantments.annotations.EffectTask;
 import zedly.zenchantments.compatibility.CompatibilityAdapter;
+import zedly.zenchantments.enums.Frequency;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import static org.bukkit.Material.*;
+import static org.bukkit.entity.EntityType.BLAZE;
+import static org.bukkit.potion.PotionEffectType.*;
 
 // EnchantArrows is the defualt structure for these arrows. Each arrow below it will extend this class
 //      and will override any methods as neccecary in its behavior
@@ -105,6 +112,24 @@ public class EnchantArrow implements AdvancedArrow {
                 }
             }
         }, 1);
+    }
+
+    @EffectTask(Frequency.HIGH)
+    // Repeated actions for certain elemental arrows
+    public static void elementalArrows() {
+        // Remove arrows if they don't exist or if it's been longer than 30 seconds
+        Iterator it = Storage.advancedProjectiles.values().iterator();
+        while (it.hasNext()) {
+            for (AdvancedArrow a : (Set<AdvancedArrow>) it.next()) {
+                a.onFlight();
+                a.tick();
+                if (a.getArrow().isDead() || a.getTick() > 600) {
+                    it.remove();
+                    a.getArrow().remove();
+                    break;
+                }
+            }
+        }
     }
 
 // Enchantment Arrows
@@ -484,7 +509,7 @@ public class EnchantArrow implements AdvancedArrow {
         public void onLaunch(LivingEntity player, List<String> lore) {
             final Config config = Config.get(player.getWorld());
             Location playLoc = player.getLocation();
-            final Location target = Utilities.getCenter(((Player)player).getTargetBlock((HashSet<Material>) null, 220));
+            final Location target = Utilities.getCenter(player.getTargetBlock((HashSet<Material>) null, 220));
             target.setY(target.getY() + .5);
             final Location c = playLoc;
             c.setY(c.getY() + 1.1);
@@ -540,5 +565,4 @@ public class EnchantArrow implements AdvancedArrow {
             die();
         }
     }
-
 }
