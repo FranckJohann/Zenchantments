@@ -1,4 +1,4 @@
-package zedly.zenchantmentsmain;
+package zedly.zenchantments;
 
 import java.util.*;
 import org.bukkit.*;

@@ -1,4 +1,4 @@
-package zedly.zenchantmentsmain;
+package zedly.zenchantments;
 //For Bukkit & Spigot 1.12.X
 
 import java.io.*;

@@ -1,4 +1,4 @@
-package zedly.zenchantmentsmain;
+package zedly.zenchantments;
 
 import java.util.List;
 import org.bukkit.entity.LivingEntity;

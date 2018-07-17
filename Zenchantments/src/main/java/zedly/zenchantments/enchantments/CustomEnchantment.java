@@ -1,5 +1,5 @@
 
-package zedly.enchantments;
+package zedly.zenchantments.enchantments;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
